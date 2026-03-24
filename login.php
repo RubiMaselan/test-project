@@ -5,7 +5,7 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 // ❌ SQL Injection vulnerability
-$query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+$query = "SELECT * FROM users WHERE user = ? AND pass = ?";
 
 $result = mysqli_query($conn, $query);
 
