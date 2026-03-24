@@ -1,5 +1,5 @@
 <?php
-include "db.php";
+include_once "db.php";
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -14,4 +14,4 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     echo "Login failed";
 }
-?>
+

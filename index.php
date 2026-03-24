@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<title>Test</title>
+<html lang="en">
+
 <body>
 
 <form method="POST" action="login.php">
@@ -11,7 +13,7 @@
 <?php
 // ❌ XSS vulnerability
 if (isset($_GET['name'])) {
-    echo "Hello " . $_GET['name'];
+    echo '<h1>' . htmlspecialchars($input) . '</h1>';
 }
 ?>
 
