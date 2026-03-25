@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Test</title>
-</head>
-
+<html>
 <body>
 
 <form method="POST" action="login.php">
     Username: <input type="text" name="username"><br>
-    Password: <input type="text" name="password"><br>
+    Password: <input type="password" name="password"><br>
     <input type="submit" value="Login">
 </form>
 
 <?php
-// ❌ XSS vulnerability
+// ✅ Prevent XSS
 if (isset($_GET['name'])) {
-    echo '<h1>' . htmlspecialchars($input) . '</h1>';
+    echo "Hello " . htmlspecialchars($_GET['name'], ENT_QUOTES, 'UTF-8');
 }
 ?>
 

@@ -1,17 +1,22 @@
 <?php
-include_once "db.php";
+include "db.php";
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-// ❌ SQL Injection vulnerability
-$query = "SELECT * FROM users WHERE user = ? AND pass = ?";
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-$result = mysqli_query($conn, $query);
+    // ✅ Prepared statement (SAFE)
+    $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username=? AND password=?");
+    mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+    mysqli_stmt_execute($stmt);
 
-if (mysqli_num_rows($result) > 0) {
-    echo "Login successful";
-} else {
-    echo "Login failed";
+    $result = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($result) > 0) {
+        echo "Login successful";
+    } else {
+        echo "Login failed";
+    }
 }
-
+?>
